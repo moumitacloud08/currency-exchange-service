@@ -6,3 +6,6 @@ Create a duplicate application and rename currency-exchange-service8001 (it will
 -Dserver.port=8001
 
 h2Db console URL:- http://localhost:8000/h2-console
+
+api-uri:-
+http://localhost:8000/currency-exchange/from/EUR/to/INR
