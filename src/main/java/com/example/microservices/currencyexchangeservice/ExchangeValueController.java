@@ -1,5 +1,7 @@
 package com.example.microservices.currencyexchangeservice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,13 @@ public class ExchangeValueController {
 	Environment environment;
 	@Autowired
 	private ExchangeValueRepository repository;
+	
+	Logger logger = LoggerFactory.getLogger(ExchangeValueController.class);
 
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public ExchangeValue exchangeService(@PathVariable String from, @PathVariable String to) {
+		
+		logger.info("exchangeService called with {} to {}", from,to);
 		ExchangeValue exchangeValue = repository.findByFromAndTo(from, to);
 		
 		exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
